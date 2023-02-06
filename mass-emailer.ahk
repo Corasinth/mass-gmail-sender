@@ -22,7 +22,7 @@ subject := row[3]
 testingMode := readSettings("testingMode") || 0
 
 ; Whether or not autorun is enabled
-autorun := readSettings("autorun") || 0
+autorunMode := readSettings("autorun") || 0
 
 ; ============================== UTILITY FUNCTIONS ==============================
 ; Function for handling the email template and updating the variables
@@ -66,7 +66,7 @@ writeEmail(){
     SendInput("{Tab}")
 
     A_Clipboard := emailBody
-    SendInput("^v").
+    SendInput("^v")
 
     changeRowNumber(1)
     tooltipUpdater()
@@ -84,7 +84,7 @@ changeRowNumber(num){
         currentRow := dataMatrix.Length
     }
     row := dataMatrix[currentRow]
-    ; setEmailVariables()
+    setEmailVariables()
     tooltipUpdater()
 }
 
@@ -142,7 +142,7 @@ a::writeEmail()
 #HotIf testingMode = 0
 s::{
     SendInput("^{Enter}")
-    if(autorun){
+    if(autorunMode){
         autorun()
         Return
     }
