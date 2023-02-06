@@ -14,6 +14,9 @@ row := dataMatrix[currentRow]
 
 ; Whether or not testing mode is active
 testingMode := readSettings("testingMode") || 1
+
+; Start tooltip
+tooltipUpdater()
 ; ============================== UTILITY FUNCTIONS ==============================
 ; Function for handling the email template and updating the variables 
 
@@ -39,6 +42,14 @@ readSettings(keyName){
 }
 
 ; Tooltip Updater
+tooltipUpdater(){
+    tooltipText := "Current Row: " currentRow
+    ; Notify users if testing mode is enabled
+    if(testingMode = 1){
+        tooltipText .= "`nTESTING MOD"
+    }
+    ToolTip(tooltipText, 0, 0)
+}
 
 ; Toggling testing mode
 
