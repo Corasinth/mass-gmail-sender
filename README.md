@@ -73,14 +73,14 @@ At this time the program does not support custom images or HTML.
 
 These are the controls for this program.
 
-`a`:: Opens a new email and auto-populates it.
-`s`:: Sends the open email. 
-`d`:: Discards the draft of the current email.
-`Up Arrow Key`:: Increments the current row by one. Loops around if you reach the last row.
-`Down Arrow Key`:: Decrements the current row by one. Loops around if you reach the first row
-`F1`:: Toggles testing mode.
-`F2`:: Suspends program and all hot keys except F2 and F3.
-`F3`:: Quits the program.
+`a`:: Opens a new email and auto-populates it.  
+`s`:: Sends the open email.   
+`d`:: Discards the draft of the current email.  
+`Up Arrow Key`:: Increments the current row by one. Loops around if you reach the last row.  
+`Down Arrow Key`:: Decrements the current row by one. Loops around if you reach the first row.   
+`F1`:: Toggles testing mode.  
+`F2`:: Suspends program and all hot keys except F2 and F3.    
+`F3`:: Quits the program.  
 
 ## Features
 
