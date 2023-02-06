@@ -164,6 +164,14 @@ s::{
 ; Deletes email
 d::^+d
 
+; Adds a hyperlink, though this is a temporary measure for the main issue hyperlinks bring up
+f::{
+    SendInput("^k")
+    Sleep(1000)
+    A_Clipboard := readSettings("hyperlink")
+    SendInput("^v{Enter}")
+}
+
 ; Toggle testing mode
 F1::toggleTestingMode()
 
