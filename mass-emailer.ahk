@@ -39,6 +39,13 @@ setEmailVariables(){
     )
 }
 
+; Increment or decrement the row count by the passed amount
+changeRowNumber(num){
+    currentRow += num
+    setEmailVariables()
+    tooltipUpdater()
+}
+
 ; Shorthand for the ini reader function
 readSettings(keyName){
     Return IniRead("./settings.ini", "Settings", KeyName)
@@ -46,7 +53,7 @@ readSettings(keyName){
 
 ; Tooltip Updater
 tooltipUpdater(){
-    tooltipText := "Current Row: " currentRow
+    tooltipText := "Current Row: " currentRow "`nCurrent Name: " name
     ; Notify users if testing mode is enabled
     if(testingMode = 1){
         tooltipText .= "`nTESTING MOD"
