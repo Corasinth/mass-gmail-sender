@@ -16,23 +16,28 @@ row := dataMatrix[currentRow]
 testingMode := readSettings("testingMode") || 1
 
 ; ============================== UTILITY FUNCTIONS ==============================
-; Function for handling the email template and updating the variables 
+; Function for handling the email template and updating the variables
+setEmailVariables(){
+    global
 
+    ; The numbers in each row correspond to the columns in the loaded spreadsheet
+    ; Additional columns holding custom text can be added in the same format as you see here, and added to the email body by surrounding it with quotations and a space, as demonstrated via the replacement of 'name' and this example:
+    ; " customText " 
+    emailAdress := row[1]
+    name := row[2]
+    subject := row[3]
 
-; row[1] = Email Address
-; row[2] = Name
-; row[3] = Subject
-; row[4+] = Custom Text
+    emailBody :=
+    (
+        "Dear " name ",
+        
+        I hope all is well. I am writing this email to test this program. 
 
-; var1 := "text1"
-; var2 := "text2"
-; var3 :=
-; ( LTrim
-;     "line1: " var1 "
- 
-; 	line2: " var2 ""
-; )
-; MsgBox(var3)
+        Sincerely, 
+        John Doe
+        "
+    )
+}
 
 ; Shorthand for the ini reader function
 readSettings(keyName){
