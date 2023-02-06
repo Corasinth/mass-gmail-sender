@@ -3,7 +3,7 @@
 #Include ./util/csv.ahk
 ; ============================== VARIABLES ==============================
 ; Sets the CSV filename
-filename := "./" readSettings("filename")
+filename := "./CSV/" readSettings("filename")
 
 ; Generates the CSV matrix
 dataMatrix := csvLoad(filename)
@@ -12,6 +12,11 @@ dataMatrix := csvLoad(filename)
 currentRow := readSettings("currentRow") || 1
 row := dataMatrix[currentRow]
 
+; Stores email info on start for the tooltip
+emailAdress := row[1]
+name := row[2]
+subject := row[3]
+
 ; Whether or not testing mode is active
 testingMode := readSettings("testingMode") || 1
 
@@ -19,10 +24,9 @@ testingMode := readSettings("testingMode") || 1
 ; Function for handling the email template and updating the variables
 setEmailVariables(){
     global
-
     ; The numbers in each row correspond to the columns in the loaded spreadsheet
     ; Additional columns holding custom text can be added in the same format as you see here, and added to the email body by surrounding it with quotations and a space, as demonstrated via the replacement of 'name' and this example:
-    ; " customText " 
+    ; " customText "
     emailAdress := row[1]
     name := row[2]
     subject := row[3]
@@ -30,10 +34,10 @@ setEmailVariables(){
     emailBody :=
     (
         "Dear " name ",
-        
-        I hope all is well. I am writing this email to test this program. 
 
-        Sincerely, 
+        I hope all is well. I am writing this email to test this program.
+
+        Sincerely,
         John Doe
         "
     )
