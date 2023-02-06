@@ -15,8 +15,6 @@ row := dataMatrix[currentRow]
 ; Whether or not testing mode is active
 testingMode := readSettings("testingMode") || 1
 
-; Start tooltip
-tooltipUpdater()
 ; ============================== UTILITY FUNCTIONS ==============================
 ; Function for handling the email template and updating the variables 
 
@@ -57,6 +55,14 @@ toggleTestingMode(){
 }
 
 ; Function to run on Exit, saving our current location
+saveCurrentRow(exitReason, exitCode){
+    IniWrite(currentRow, "./settings.ini", "Settings", "currentRow")
+}
+
+; ============================== FUNCTION CALLS ==============================
+; Call these functions when the script starts
+tooltipUpdater()
+OnExit(saveCurrentRow)
 
 ; ============================== HOTKEYS ==============================
 ; Generates new email
