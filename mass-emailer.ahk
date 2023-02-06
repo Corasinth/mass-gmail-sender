@@ -31,7 +31,7 @@ setEmailVariables(){
     emailAdress := row[1]
     name := row[2]
     subject := row[3]
-MsgBox(name)
+
     emailBody :=
     (
         "Dear " name ",
@@ -62,7 +62,7 @@ writeEmail(){
     SendInput("{Tab}")
 
     A_Clipboard := emailBody
-    SendInput("^v")
+    SendInput("^v").
 
     changeRowNumber(1)
     tooltipUpdater()
@@ -73,8 +73,14 @@ writeEmail(){
 changeRowNumber(num){
     global
     currentRow += num
+    if(currentRow = dataMatrix.Length + 1){
+        currentRow := 1
+    } 
+    if(currentRow = 0){
+        currentRow := dataMatrix.Length
+    }
     row := dataMatrix[currentRow]
-    setEmailVariables()
+    ; setEmailVariables()
     tooltipUpdater()
 }
 
@@ -117,7 +123,14 @@ a::writeEmail()
 
 ; Sends email if not in testing mode
 #HotIf testingMode = 0
-s::^Enter
+s::{
+    SendInput("^{Enter}")
+    if(currentRow = dataMatrix.Length){
+        currentRow := 1
+        MsgBox("Reached end of data. Program will now quit")
+        ExitApp
+    }
+}
 #HotIf 
 
 ; Deletes email
