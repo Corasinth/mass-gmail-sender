@@ -29,6 +29,9 @@
 ; MsgBox(var3)
 
 ; Shorthand for the ini reader function
+readSettings(keyName){
+    Return IniRead("./settings.ini", "Settings", keyName)
+}
 
 ; Tooltip Updater
 
