@@ -36,6 +36,8 @@ Secondly, the `currentRow` setting contains the row the program will start from.
 
 Thirdly, `testingMode` can be enabled by setting it to `1`. This disables the ability to send an email via the hotkey, and is meant for testing that an email template or CSV file is working correctly.
 
+Fourthly, `delimiter` is used if you set a custom delimeter in the CSV file. You might want to do this if you have custom text that includes commas, as that might cause the script to incorrectly detect that some piece of text is in a different cell.
+
 Lastly, `autoRun`, which can also be activated by setting it to `1` before starting the program, will send all emails as soon as you send the first email. Usually, the program opens an email, then lets you send it manually. Autorun will loop the process without requiring your involvement.
 
 ## Usage 
