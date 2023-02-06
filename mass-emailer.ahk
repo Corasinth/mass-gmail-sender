@@ -61,17 +61,17 @@ writeEmail(){
 
     ; Opens compose
     SendInput("c")
-    Sleep(500)
+    Sleep(1000)
 
     A_Clipboard := emailAdress
     SendInput("^v")
     SendInput("{Tab}")
-    Sleep(500)
+    Sleep(1000)
 
     A_Clipboard := subject
     SendInput("^v")
     SendInput("{Tab}")
-    Sleep(500)
+    Sleep(1000)
 
     A_Clipboard := emailBody
     SendInput("^v")
