@@ -19,7 +19,7 @@ name := row[2]
 subject := row[3]
 
 ; Whether or not testing mode is active
-testingMode := readSettings("testingMode") || 1
+testingMode := readSettings("testingMode") || 0
 
 ; ============================== UTILITY FUNCTIONS ==============================
 ; Function for handling the email template and updating the variables
@@ -31,7 +31,7 @@ setEmailVariables(){
     emailAdress := row[1]
     name := row[2]
     subject := row[3]
-
+MsgBox(name)
     emailBody :=
     (
         "Dear " name ",
@@ -71,7 +71,9 @@ writeEmail(){
 
 ; Increment or decrement the row count by the passed amount
 changeRowNumber(num){
+    global
     currentRow += num
+    row := dataMatrix[currentRow]
     setEmailVariables()
     tooltipUpdater()
 }
@@ -83,17 +85,20 @@ readSettings(keyName){
 
 ; Tooltip Updater
 tooltipUpdater(){
+    global
     tooltipText := "Current Row: " currentRow "`nCurrent Name: " name
     ; Notify users if testing mode is enabled
     if(testingMode = 1){
-        tooltipText .= "`nTESTING MOD"
+        tooltipText .= "`nTESTING MODE"
     }
     ToolTip(tooltipText, 0, 0)
 }
 
 ; Toggling testing mode
 toggleTestingMode(){
+    global
     testingMode := testingMode ? 0 : 1
+    tooltipUpdater()
 }
 
 ; Function to run on Exit, saving our current location
