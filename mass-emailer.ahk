@@ -10,6 +10,7 @@ dataMatrix := csvLoad(filename)
 
 ; Stores the current row number, and the row itself as an array for easy use
 currentRow := readSettings("currentRow") || 1
+row := dataMatrix[currentRow]
 
 ; Whether or not testing mode is active
 testingMode := readSettings("testingMode") || 1
