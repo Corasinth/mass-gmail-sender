@@ -21,6 +21,9 @@ subject := row[3]
 ; Whether or not testing mode is active
 testingMode := readSettings("testingMode") || 0
 
+; Whether or not autorun is enabled
+autorun := readSettings("autorun") || 0
+
 ; ============================== UTILITY FUNCTIONS ==============================
 ; Function for handling the email template and updating the variables
 setEmailVariables(){
@@ -32,6 +35,7 @@ setEmailVariables(){
     name := row[2]
     subject := row[3]
 
+    ; Generally, all text can be entered without issue. However, '`n' represents a new line, '`r' represents a carrige return, and '`b' represents a backspace.
     emailBody :=
     (
         "Dear " name ",
@@ -112,6 +116,19 @@ saveCurrentRow(exitReason, exitCode){
     IniWrite(currentRow, "./settings.ini", "Settings", "currentRow")
 }
 
+; Auto run function
+autorun(){
+    writeEmail()
+    SendInput("^{Enter}")
+    if(currentRow = dataMatrix.Length){
+        currentRow := 1
+        MsgBox("Reached end of data. Program will now quit")
+        ExitApp
+    }
+    Sleep(500)
+    autorun()
+}
+
 ; ============================== FUNCTION CALLS ==============================
 ; Call these functions when the script starts
 tooltipUpdater()
@@ -125,6 +142,10 @@ a::writeEmail()
 #HotIf testingMode = 0
 s::{
     SendInput("^{Enter}")
+    if(autorun){
+        autorun()
+        Return
+    }
     if(currentRow = dataMatrix.Length){
         currentRow := 1
         MsgBox("Reached end of data. Program will now quit")
