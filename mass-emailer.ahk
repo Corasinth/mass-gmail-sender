@@ -1,6 +1,7 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 #Include ./util/csv.ahk
+CoordMode("ToolTip", "Screen")
 ; ============================== VARIABLES ==============================
 ; Sets the CSV filename
 filename := "./CSV/" readSettings("filename")
@@ -66,6 +67,7 @@ writeEmail(){
     changeRowNumber(1)
     tooltipUpdater()
 }
+
 
 ; Increment or decrement the row count by the passed amount
 changeRowNumber(num){
