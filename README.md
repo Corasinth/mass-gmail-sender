@@ -48,7 +48,7 @@ To use this mass emailer you must first set up a spreadsheet with your email dat
 
 Each row of the spreadsheet should contain the details for one email.
 
-By default, the first column contains the email address, the second the recepient's name, the next the subject line, and all further columns custom text which will be inserted into the email template as you desire.
+By default, the first column contains the email address, the second the recepient's first name, next the recepient's last name, then the subject line, and all further columns custom text which will be inserted into the email template as you desire. You can leave a column blank, but you cannot omit it entirely without editing the variables directly.
 
 You must save the CSV file inside the CSV folder, and add the file name to the `settings.ini` file as the example in the file indicates
 
@@ -58,18 +58,17 @@ The template itself can be simply written out and pasted in the appropriate loca
 
 To insert custom text you'll need to do the following. 
 
-First, identify which column the custom text you want to insert belongs to. Custom text columns usually start at 4 and up. Once you have that number you can use it to creat a pointer to your custom text. Here is an example of two pieces of custom text in the fourth and fifth columns being pointed to:
+First, identify which column the custom text you want to insert belongs to. Custom text columns usually start at 5 and up. Once you have that number you can use it to creat a pointer to your custom text. Here is an example of two pieces of custom text in the fourth and fifth columns being pointed to:
 ```
-dataMatrix[4]
 dataMatrix[5]
+dataMatrix[6]
 ```
 
-When inserting these pointers into your email template, you need to surround them with double quotes and empty spaces, like so: `" dataMatrix[4] "`. You can skip the middle quotes, but not the spaces, when combining multiple adjacent pieces of custom text. 
+When inserting these pointers into your email template, you need to surround them with double quotes and empty spaces, like so: `" dataMatrix[5] "`. Adjacent pieces of custom text need a space between them as shown below. 
 ```
-This sentence is part on an email body, prefacing two pieces of custom text: " dataMatrix[5] dataMatrix[5] ". 
+This sentence is part on an email body, prefacing two pieces of custom text: " dataMatrix[5] " " dataMatrix[6] ". 
 ```
 At this time the program does not support custom images or HTML. 
-
 
 ### Controls
 
