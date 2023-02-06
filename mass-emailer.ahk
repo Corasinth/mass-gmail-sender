@@ -6,8 +6,11 @@ CoordMode("ToolTip", "Screen")
 ; Sets the CSV filename
 filename := "./CSV/" readSettings("filename")
 
+; Sets the CSV delimiter, since you might want to include commas in the text
+theDelimeter :=  readSettings("delimiter") || ","
+
 ; Generates the CSV matrix
-dataMatrix := csvLoad(filename)
+dataMatrix := csvLoad(filename, theDelimeter)
 
 ; Stores the current row number, and the row itself as an array for easy use
 currentRow := readSettings("currentRow") || 1
