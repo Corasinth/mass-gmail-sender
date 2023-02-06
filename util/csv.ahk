@@ -4,7 +4,7 @@
 csvLoad(filename,  theDelimiter:=","){
     matrix := []
 
-    fileText := FileRead(filename, )
+    fileText := FileRead(filename)
     MsgBox(fileText)
 
     Loop Parse fileText, "`n" {
