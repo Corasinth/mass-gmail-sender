@@ -52,6 +52,9 @@ tooltipUpdater(){
 }
 
 ; Toggling testing mode
+toggleTestingMode(){
+    testingMode := testingMode ? 0 : 1
+}
 
 ; Function to run on Exit, saving our current location
 
