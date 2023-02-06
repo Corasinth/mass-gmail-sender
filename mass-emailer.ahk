@@ -131,3 +131,30 @@ Down::changeRowNumber(-1)
 F2::Suspend(-1)
 F3::ExitApp
 #SuspendExempt False
+
+; ============================== HANDLES SUSPENDING TOOLTIP ON SUSPEND ==============================
+SuspendC := Suspend.GetMethod("Call")
+Suspend.DefineProp("Call", {
+Call:(this, mode:=-1) => (SuspendC(this, mode), OnSuspend(A_IsSuspended))
+})
+OnMessage(0x111, OnSuspendMsg)
+OnSuspendMsg(wp, *) {
+    if ((wp = 65305) || (wp = 65404)){
+        OnSuspend(!A_IsSuspended)
+    }
+}
+
+; wp numbers grabbed via this bit of code
+; OnMessage(0x111, WM_COMMAND)
+
+; WM_COMMAND(wparam, lparam, msg, hwnd) {
+;     OutputDebug "wp: " wparam " | lp: " lparam "`n"
+; }
+OnSuspend(mode) {
+    global
+    if (tooltipOn && mode = 1){
+        ToolTip()
+    } else if (tooltipOn && mode = 0){
+        tooltipUpdater()
+    }
+}
