@@ -43,6 +43,30 @@ setEmailVariables(){
     )
 }
 
+; Create a new email pasting variables and running the correct functions
+writeEmail(){
+    ; Not strictly necessary, but I'm including it here for potential edge cases where the variables might not have been updated
+    ; Also ensures emailBody is set the first time thes script runs
+    setEmailVariables()
+
+    ; Opens compose 
+    SendInput("c")
+
+    A_Clipboard := emailAdress
+    SendInput("^v")
+    SendInput("{Tab}")
+
+    A_Clipboard := subject
+    SendInput("^v")
+    SendInput("{Tab}")
+
+    A_Clipboard := emailBody
+    SendInput("^v")
+
+    changeRowNumber(1)
+    tooltipUpdater()
+}
+
 ; Increment or decrement the row count by the passed amount
 changeRowNumber(num){
     currentRow += num
