@@ -108,13 +108,26 @@ OnExit(saveCurrentRow)
 
 ; ============================== HOTKEYS ==============================
 ; Generates new email
+a::writeEmail()
 
 ; Sends email if not in testing mode
+#HotIf testingMode = 0
+s::^Enter
+#HotIf 
 
 ; Deletes email
+d::^+d
 
 ; Toggle testing mode
+F1::toggleTestingMode()
 
 ; Custom increment or decrement current row
+Up::changeRowNumber(1)
+Down::changeRowNumber(-1)
 
 ; Suspend and Quit hotkeys
+#SuspendExempt True
+; The suspend shortcut also disables the tooltip
+F2::Suspend(-1)
+F3::ExitApp
+#SuspendExempt False
