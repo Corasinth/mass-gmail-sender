@@ -152,9 +152,9 @@ OnSuspendMsg(wp, *) {
 ; }
 OnSuspend(mode) {
     global
-    if (tooltipOn && mode = 1){
+    if (mode = 1){
         ToolTip()
-    } else if (tooltipOn && mode = 0){
+    } else if (mode = 0){
         tooltipUpdater()
     }
 }
