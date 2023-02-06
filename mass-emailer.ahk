@@ -7,7 +7,7 @@ CoordMode("ToolTip", "Screen")
 filename := "./CSV/" readSettings("filename")
 
 ; Sets the CSV delimiter, since you might want to include commas in the text
-theDelimeter :=  readSettings("delimiter") || ","
+theDelimeter := readSettings("delimiter") || ","
 
 ; Generates the CSV matrix
 dataMatrix := csvLoad(filename, theDelimeter)
@@ -18,9 +18,11 @@ row := dataMatrix[currentRow]
 
 ; Stores email info on start for the tooltip
 emailAdress := row[1]
-name := row[2]
-subject := row[3]
+firstName := row[2]
+lastName := row[3]
+subject := row[4]
 
+    MsgBox(emailAdress firstName lastName subject)
 ; Whether or not testing mode is active
 testingMode := readSettings("testingMode") || 0
 
@@ -35,13 +37,13 @@ setEmailVariables(){
     ; Additional columns holding custom text can be added in the same format as you see here, and added to the email body by surrounding it with quotations and a space, as demonstrated via the replacement of 'name' and this example:
     ; " customText "
     emailAdress := row[1]
-    name := row[2]
-    subject := row[3]
-
+    firstName := row[2]
+    lastName := row[3]
+    subject := row[4]
     ; Generally, all text can be entered without issue. However, '`n' represents a new line, '`r' represents a carrige return, and '`b' represents a backspace.
     emailBody :=
     (
-        "Dear " name ",
+        "Dear " firstName " " lastName ",
 
         I hope all is well. I am writing this email to test this program.
 
@@ -57,16 +59,19 @@ writeEmail(){
     ; Also ensures emailBody is set the first time thes script runs
     setEmailVariables()
 
-    ; Opens compose 
+    ; Opens compose
     SendInput("c")
+    Sleep(500)
 
     A_Clipboard := emailAdress
     SendInput("^v")
     SendInput("{Tab}")
+    Sleep(500)
 
     A_Clipboard := subject
     SendInput("^v")
     SendInput("{Tab}")
+    Sleep(500)
 
     A_Clipboard := emailBody
     SendInput("^v")
@@ -75,14 +80,13 @@ writeEmail(){
     tooltipUpdater()
 }
 
-
 ; Increment or decrement the row count by the passed amount
 changeRowNumber(num){
     global
     currentRow += num
     if(currentRow = dataMatrix.Length + 1){
         currentRow := 1
-    } 
+    }
     if(currentRow = 0){
         currentRow := dataMatrix.Length
     }
@@ -99,7 +103,7 @@ readSettings(keyName){
 ; Tooltip Updater
 tooltipUpdater(){
     global
-    tooltipText := "Current Row: " currentRow "`nCurrent Name: " name
+    tooltipText := "Current Row: " currentRow "`nCurrent Name: " firstName lastName
     ; Notify users if testing mode is enabled
     if(testingMode = 1){
         tooltipText .= "`nTESTING MODE"
@@ -155,7 +159,7 @@ s::{
         ExitApp
     }
 }
-#HotIf 
+#HotIf
 
 ; Deletes email
 d::^+d
